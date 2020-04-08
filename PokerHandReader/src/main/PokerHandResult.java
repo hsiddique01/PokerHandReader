@@ -24,11 +24,17 @@ public class PokerHandResult {
 	private static final String STRAIGHT_FLUSH = "Straight Flush";
 	private static final String ROYAL_FLUSH = "Royal Flush";
 	private static final String HIGH_CARD = "High Card ";
+	private static final String STRAIGHT = "Straight";
 	
 	public static String whatIsMyHand(List<Integer> cardValues, String[] cardTypes) {
 		if (checkFlush(cardTypes)) {
 			return whatKindOfFlush(cardValues);
-		} else {
+		} else if (checkCount(cardValues)) {
+			return null;
+		} else if (checkOrder(cardValues)) {
+			return STRAIGHT;
+		}
+		else {
 			return highCard(cardValues);
 		}
 	}

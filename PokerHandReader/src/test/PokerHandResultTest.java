@@ -180,5 +180,18 @@ public class PokerHandResultTest {
 		assertEquals("Expect High Card 13 when cardValues are sent with 8 being the highest", "High Card 13", result);
 	}
 	
+	@Test
+	public void testWhatisMyHandReturnsAStriaghtWhenStraightIsSent() {
+		List<Integer> cardValues = new ArrayList<Integer>();
+		cardValues.add(4);
+		cardValues.add(2);
+		cardValues.add(5);
+		cardValues.add(3);
+		cardValues.add(1);
+	
+		String[] cardTypes = {"A", "S", "H", "S", "S"};
+		String result = PokerHandResult.whatIsMyHand(cardValues, cardTypes);
+		assertEquals("Expected Straight when straight is sent", "Straight", result);
+	}
 	
 }
