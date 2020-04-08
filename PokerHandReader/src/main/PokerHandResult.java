@@ -23,14 +23,15 @@ public class PokerHandResult {
 	private static final String FLUSH = "Flush";
 	private static final String STRAIGHT_FLUSH = "Straight Flush";
 	private static final String ROYAL_FLUSH = "Royal Flush";
+	private static final String HIGH_CARD = "High Card ";
 	
-//	public static String whatIsMyHand(List<Integer> cardValues, String[] cardTypes) {
-//		if (checkFlush(cardTypes)) {
-//			return whatKindOfFlush(cardValues, cardTypes);
-//		}
-//		
-//		return null;
-//	}
+	public static String whatIsMyHand(List<Integer> cardValues, String[] cardTypes) {
+		if (checkFlush(cardTypes)) {
+			return whatKindOfFlush(cardValues);
+		} else {
+			return highCard(cardValues);
+		}
+	}
 	
 	public static boolean checkFlush(String[] cardTypes) {
 		int counter = 0;
@@ -79,7 +80,7 @@ public class PokerHandResult {
 		return result;
 	}
 
-	public static boolean isThereACount(List<Integer> cardValues) {
+	public static boolean checkCount(List<Integer> cardValues) {
 		HashMap<Integer, Integer> counterCheck = valueCounterMap(cardValues);
 		return counterCheck.size() == 5? false: true;
 	}
@@ -92,5 +93,10 @@ public class PokerHandResult {
 			return STRAIGHT_FLUSH;
 		}
 		return FLUSH;
+	}
+
+	public static String highCard(List<Integer> cardValues) {
+		Collections.sort(cardValues);
+		return HIGH_CARD + cardValues.get(4);
 	}
 }

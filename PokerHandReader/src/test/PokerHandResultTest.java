@@ -99,7 +99,7 @@ public class PokerHandResultTest {
 		cardValues.add(6);
 		cardValues.add(8);
 		
-		boolean result = PokerHandResult.isThereACount(cardValues);
+		boolean result = PokerHandResult.checkCount(cardValues);
 		assertFalse("Expected false when all input values are unique", result);
 	}
 	
@@ -140,19 +140,45 @@ public class PokerHandResultTest {
 		assertEquals("Expected Royal Flush when ordered values but identical types are provided", "Royal Flush", result);
 	}
 	
-//	@Test
-//	public void testProvidingMatchingSuitsSuitsSendsBackFlush() {
-//		List<Integer> cardValues = new ArrayList<Integer>();
-//		cardValues.add(8);
-//		cardValues.add(6);
-//		cardValues.add(5);
-//		cardValues.add(3);
-//		cardValues.add(1);
-//	
-//		String[] cardTypes = {"S", "S", "S", "S", "S"}
-//		String result = PokerHandResult.whatIsMyHand(cardValues, cardTypes);
-//		assertEquals("Expected Flash when unique numbers but identifical types are sent", "Flash", result);			
-//	}
+	@Test
+	public void testProvidingMatchingSuitsSuitsSendsBackFlush() {
+		List<Integer> cardValues = new ArrayList<Integer>();
+		cardValues.add(8);
+		cardValues.add(6);
+		cardValues.add(5);
+		cardValues.add(3);
+		cardValues.add(1);
+	
+		String[] cardTypes = {"S", "S", "S", "S", "S"};
+		String result = PokerHandResult.whatIsMyHand(cardValues, cardTypes);
+		assertEquals("Expected Flush when unique numbers but identifical types are sent", "Flush", result);			
+	}	
+	
+	@Test
+	public void testProvideNothingReturnsHighCard() {
+		List<Integer> cardValues = new ArrayList<Integer>();
+		cardValues.add(8);
+		cardValues.add(6);
+		cardValues.add(5);
+		cardValues.add(3);
+		cardValues.add(1);
+		String result = PokerHandResult.highCard(cardValues);
+		assertEquals("Expect High Card 8 when cardValues are sent with 8 being the highest", "High Card 8", result);
+	}
+	
+	@Test
+	public void testWhatIsMyHandFunctionWithHighCardOnly() {
+		List<Integer> cardValues = new ArrayList<Integer>();
+		cardValues.add(13);
+		cardValues.add(6);
+		cardValues.add(5);
+		cardValues.add(3);
+		cardValues.add(1);
+	
+		String[] cardTypes = {"A", "S", "H", "S", "S"};
+		String result = PokerHandResult.whatIsMyHand(cardValues, cardTypes);
+		assertEquals("Expect High Card 13 when cardValues are sent with 8 being the highest", "High Card 13", result);
+	}
 	
 	
 }
