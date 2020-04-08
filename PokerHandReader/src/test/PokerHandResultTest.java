@@ -194,4 +194,36 @@ public class PokerHandResultTest {
 		assertEquals("Expected Straight when straight is sent", "Straight", result);
 	}
 	
+	@Test
+	public void testWhatKindOfCountFunctionReturnsOnePair() {
+		List<Integer> cardValues = new ArrayList<Integer>();
+		cardValues.add(4);
+		cardValues.add(3);
+		cardValues.add(2);
+		cardValues.add(1);
+		cardValues.add(1);
+		String result = PokerHandResult.whatKindOfCount(cardValues);
+		assertEquals("Expected One Pair when double is sent", "One Pair", result);
+	}
+	
+	@Test
+	public void testWhatKindOfCountThreeReturnsThreeOfAKind() {
+		HashMap<Integer, Integer> input = new HashMap<Integer, Integer>();
+		input.put(10, 3);
+		input.put(11, 1);
+		input.put(12, 1);
+		String result = PokerHandResult.whatKindOfCountThree(input);
+		assertEquals("Expect Three Of A Kind when a triple is sent in", "Three Of A Kind", result);
+	}
+	
+	@Test
+	public void testWhatKindOfCountThreeReturnsTwoPairs() {
+		HashMap<Integer, Integer> input = new HashMap<Integer, Integer>();
+		input.put(10, 2);
+		input.put(11, 2);
+		input.put(12, 1);
+		String result = PokerHandResult.whatKindOfCountThree(input);
+		assertEquals("Expect Two Pairs when a two doubles are sent in", "Two Pairs", result);
+	}
+	
 }

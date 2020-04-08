@@ -3,6 +3,7 @@ package main;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class PokerHandResult {
 
@@ -25,6 +26,9 @@ public class PokerHandResult {
 	private static final String ROYAL_FLUSH = "Royal Flush";
 	private static final String HIGH_CARD = "High Card ";
 	private static final String STRAIGHT = "Straight";
+	private static final String ONE_PAIR = "One Pair";
+	private static final String THREE_OF_A_KIND = "Three Of A Kind";
+	private static final String TWO_PAIRS = "Two Pairs";
 	
 	public static String whatIsMyHand(List<Integer> cardValues, String[] cardTypes) {
 		if (checkFlush(cardTypes)) {
@@ -104,5 +108,28 @@ public class PokerHandResult {
 	public static String highCard(List<Integer> cardValues) {
 		Collections.sort(cardValues);
 		return HIGH_CARD + cardValues.get(4);
+	}
+
+	public static String whatKindOfCount(List<Integer> cardValues) {
+		HashMap<Integer, Integer> countResults = valueCounterMap(cardValues);
+		
+		if (countResults.size() == 4) {
+			return ONE_PAIR;
+		}
+		return null;
+	}
+
+	public static String whatKindOfCountThree(HashMap<Integer, Integer> countResults) {
+		System.out.println(countResults);
+		Integer three = 3;
+		Integer two = 2;
+		for(Map.Entry entry: countResults.entrySet()) {
+		
+			System.out.println(entry);
+			if (three.equals(entry.getValue())) {
+				return THREE_OF_A_KIND;
+			}
+		}
+		return TWO_PAIRS;
 	}
 }
