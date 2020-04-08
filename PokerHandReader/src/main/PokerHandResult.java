@@ -7,20 +7,6 @@ import java.util.Map;
 
 public class PokerHandResult {
 
-/**
- * CardType = String Array
- * CardValue = List int
- * 
- * Function:
- * 	Flush check
- * 	Order check
- * 	Counter
- * 		- returns HashMap, Key is cardvalue, Value is counter
- * 		- For loop list, if cardValue exist in HashMap, increment Value  	
- * @param cardTypes
- * @return
- */
-
 	private static final String FLUSH = "Flush";
 	private static final String STRAIGHT_FLUSH = "Straight Flush";
 	private static final String ROYAL_FLUSH = "Royal Flush";
@@ -29,12 +15,14 @@ public class PokerHandResult {
 	private static final String ONE_PAIR = "One Pair";
 	private static final String THREE_OF_A_KIND = "Three Of A Kind";
 	private static final String TWO_PAIRS = "Two Pairs";
+	private static final String FOUR_OF_A_KIND = "Four Of A Kind";
+	private static final String FULL_HOUSE = "Full House";
 	
 	public static String whatIsMyHand(List<Integer> cardValues, String[] cardTypes) {
 		if (checkFlush(cardTypes)) {
 			return whatKindOfFlush(cardValues);
 		} else if (checkCount(cardValues)) {
-			return null;
+			return whatKindOfCount(cardValues);
 		} else if (checkOrder(cardValues)) {
 			return STRAIGHT;
 		}
@@ -112,24 +100,33 @@ public class PokerHandResult {
 
 	public static String whatKindOfCount(List<Integer> cardValues) {
 		HashMap<Integer, Integer> countResults = valueCounterMap(cardValues);
-		
 		if (countResults.size() == 4) {
 			return ONE_PAIR;
+		} else if (countResults.size() == 3) {
+			return whatKindOfCountThree(countResults);
+		} else {
+			return whatKindOfCountTwo(countResults);
 		}
-		return null;
 	}
 
 	public static String whatKindOfCountThree(HashMap<Integer, Integer> countResults) {
-		System.out.println(countResults);
 		Integer three = 3;
 		Integer two = 2;
 		for(Map.Entry entry: countResults.entrySet()) {
-		
-			System.out.println(entry);
 			if (three.equals(entry.getValue())) {
 				return THREE_OF_A_KIND;
 			}
 		}
 		return TWO_PAIRS;
+	}
+
+	public static String whatKindOfCountTwo(HashMap<Integer, Integer> countResults) {
+		Integer four = 4;
+		for(Map.Entry entry: countResults.entrySet()) {
+			if (four.equals(entry.getValue())) {
+				return FOUR_OF_A_KIND;
+			}
+		}
+		return FULL_HOUSE;
 	}
 }

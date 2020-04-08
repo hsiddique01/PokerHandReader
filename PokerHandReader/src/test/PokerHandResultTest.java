@@ -213,7 +213,7 @@ public class PokerHandResultTest {
 		input.put(11, 1);
 		input.put(12, 1);
 		String result = PokerHandResult.whatKindOfCountThree(input);
-		assertEquals("Expect Three Of A Kind when a triple is sent in", "Three Of A Kind", result);
+		assertEquals("Expected Three Of A Kind when a triple is sent in", "Three Of A Kind", result);
 	}
 	
 	@Test
@@ -223,7 +223,126 @@ public class PokerHandResultTest {
 		input.put(11, 2);
 		input.put(12, 1);
 		String result = PokerHandResult.whatKindOfCountThree(input);
-		assertEquals("Expect Two Pairs when a two doubles are sent in", "Two Pairs", result);
+		assertEquals("Expected Two Pairs when a two doubles are sent in", "Two Pairs", result);
 	}
 	
+	@Test
+	public void testWhatKindOfCountReturnsThreeOfAKindAndTwoPairs() {
+		List<Integer> cardPairs = new ArrayList<Integer>();
+		cardPairs.add(4);
+		cardPairs.add(4);
+		cardPairs.add(2);
+		cardPairs.add(1);
+		cardPairs.add(1);
+		String resultPairs = PokerHandResult.whatKindOfCount(cardPairs);
+		assertEquals("Expected Two Pairs when testing whatKindOfCount function", "Two Pairs", resultPairs);
+		
+		
+		List<Integer> cardTriples = new ArrayList<Integer>();
+		cardTriples.add(4);
+		cardTriples.add(4);
+		cardTriples.add(4);
+		cardTriples.add(3);
+		cardTriples.add(1);
+		String resultTriple = PokerHandResult.whatKindOfCount(cardTriples);
+		assertEquals("Expected Three Of A Kind testing whatKindOfCount function", "Three Of A Kind", resultTriple);
+	}
+	
+	@Test
+	public void testWhatKindofCountTwoReturnsFourOfAKind() {
+		HashMap<Integer, Integer> input = new HashMap<Integer, Integer>();
+		input.put(10, 4);
+		input.put(11, 1);
+		
+		String result = PokerHandResult.whatKindOfCountTwo(input);
+		assertEquals("Expected Four Of A Kind when sending in four of a kind", "Four Of A Kind", result);
+	}
+	
+	@Test
+	public void testWhatKindofCountTwoReturnsFullHouse() {
+		HashMap<Integer, Integer> input = new HashMap<Integer, Integer>();
+		input.put(10, 3);
+		input.put(11, 2);
+		
+		String result = PokerHandResult.whatKindOfCountTwo(input);
+		assertEquals("Expected Full House when sending in four of a kind", "Full House", result);
+	}
+	
+	@Test
+	public void testWhatKindOfCoundReturnsFourOfAKindAndFullHouse() {
+		List<Integer> cardFour = new ArrayList<Integer>();
+		cardFour.add(4);
+		cardFour.add(1);
+		cardFour.add(1);
+		cardFour.add(1);
+		cardFour.add(1);
+		String resultFour = PokerHandResult.whatKindOfCount(cardFour);
+		assertEquals("Expected Four Of A Kind when testing whatKindOfCount function", "Four Of A Kind", resultFour);
+		
+		
+		List<Integer> cardFull = new ArrayList<Integer>();
+		cardFull.add(4);
+		cardFull.add(4);
+		cardFull.add(4);
+		cardFull.add(3);
+		cardFull.add(3);
+		String resultFull = PokerHandResult.whatKindOfCount(cardFull);
+		assertEquals("Expected Full House testing whatKindOfCount function", "Full House", resultFull);
+	}
+	
+	@Test
+	public void testWhatIsMyHandFunctionWithFullHouse() {
+		List<Integer> cardValues = new ArrayList<Integer>();
+		cardValues.add(4);
+		cardValues.add(4);
+		cardValues.add(4);
+		cardValues.add(3);
+		cardValues.add(3);
+	
+		String[] cardTypes = {"A", "S", "S", "S", "S"};
+		String result = PokerHandResult.whatIsMyHand(cardValues, cardTypes);
+		assertEquals("Expected Full House when unique numbers but identifical types are sent", "Full House", result);	
+	}
+	
+	@Test
+	public void testWhatIsMyHandFunctionWithFourOfAKind() {
+		List<Integer> cardValues = new ArrayList<Integer>();
+		cardValues.add(4);
+		cardValues.add(4);
+		cardValues.add(4);
+		cardValues.add(4);
+		cardValues.add(3);
+	
+		String[] cardTypes = {"A", "S", "S", "S", "S"};
+		String result = PokerHandResult.whatIsMyHand(cardValues, cardTypes);
+		assertEquals("Expected Four Of A Kind when unique numbers but identifical types are sent", "Four Of A Kind", result);	
+	}
+	
+	@Test
+	public void testWhatIsMyHandFunctionWithTwoPairs() {
+		List<Integer> cardValues = new ArrayList<Integer>();
+		cardValues.add(4);
+		cardValues.add(4);
+		cardValues.add(3);
+		cardValues.add(1);
+		cardValues.add(3);
+	
+		String[] cardTypes = {"A", "S", "S", "S", "S"};
+		String result = PokerHandResult.whatIsMyHand(cardValues, cardTypes);
+		assertEquals("Expected Two Pairs when unique numbers but identifical types are sent", "Two Pairs", result);	
+	}
+	
+	@Test
+	public void testWhatIsMyHandFunctionWithThreeOfAKind() {
+		List<Integer> cardValues = new ArrayList<Integer>();
+		cardValues.add(4);
+		cardValues.add(4);
+		cardValues.add(4);
+		cardValues.add(1);
+		cardValues.add(3);
+	
+		String[] cardTypes = {"A", "S", "S", "S", "S"};
+		String result = PokerHandResult.whatIsMyHand(cardValues, cardTypes);
+		assertEquals("Expected Three Of A Kind when unique numbers but identifical types are sent", "Three Of A Kind", result);	
+	}
 }
