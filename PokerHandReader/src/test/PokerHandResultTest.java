@@ -117,17 +117,27 @@ public class PokerHandResultTest {
 	}
 	
 	@Test
-	public void testWhatKindOfFlushFunctionReturnsFlush() {
+	public void testWhatKindOfFlushFunctionReturnsStrightFlush() {
 		List<Integer> cardValues = new ArrayList<Integer>();
-		cardValues.add(8);
-		cardValues.add(6);
+		cardValues.add(4);
+		cardValues.add(2);
 		cardValues.add(5);
 		cardValues.add(3);
-		cardValues.add(1);
-		String[] cardTypes = {"S", "S", "S", "S", "S"};
-		
-		String result = PokerHandResult.whatKindOfFlush(cardValues, cardTypes);
-		assertEquals("Expected Flush when unique values but identical types are provided", "Flush", result);
+		cardValues.add(1);		
+		String result = PokerHandResult.whatKindOfFlush(cardValues);
+		assertEquals("Expected Stright Flush when ordered values but identical types are provided", "Straight Flush", result);
+	}
+	
+	@Test
+	public void testWhatKindOfFlushFunctionReturnsRoyalFlush() {
+		List<Integer> cardValues = new ArrayList<Integer>();
+		cardValues.add(11);
+		cardValues.add(10);
+		cardValues.add(13);
+		cardValues.add(12);
+		cardValues.add(1);		
+		String result = PokerHandResult.whatKindOfFlush(cardValues);
+		assertEquals("Expected Royal Flush when ordered values but identical types are provided", "Royal Flush", result);
 	}
 	
 //	@Test

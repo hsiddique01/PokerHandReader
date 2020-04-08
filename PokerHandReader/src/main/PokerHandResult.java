@@ -20,7 +20,9 @@ public class PokerHandResult {
  * @return
  */
 
-	private static final String HAND_RESULT = "Flush";
+	private static final String FLUSH = "Flush";
+	private static final String STRAIGHT_FLUSH = "Straight Flush";
+	private static final String ROYAL_FLUSH = "Royal Flush";
 	
 //	public static String whatIsMyHand(List<Integer> cardValues, String[] cardTypes) {
 //		if (checkFlush(cardTypes)) {
@@ -84,8 +86,11 @@ public class PokerHandResult {
 
 	public static String whatKindOfFlush(List<Integer> cardValues) {
 		if (checkOrder(cardValues)) {
-			return null;
+			if (cardValues.contains(1) && cardValues.contains(13)) {
+				return ROYAL_FLUSH;
+			}
+			return STRAIGHT_FLUSH;
 		}
-		return "Flush";
+		return FLUSH;
 	}
 }
