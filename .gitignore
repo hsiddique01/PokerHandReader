@@ -2,3 +2,4 @@
 *.prefs
 PokerHandReader/.project
 PokerHandReader/.classpath
+PokerHandReader/bin/main/PokerHandResult.class
