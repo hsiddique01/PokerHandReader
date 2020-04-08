@@ -90,7 +90,19 @@ public class PokerHandResultTest {
 		assertTrue("Expected 2 to exist as a key", result.containsKey(2));
 	}
 	
-	
+	@Test
+	public void testProvidingMatchingSuitsSuitsSendsBackFlush() {
+		List<Integer> cardValues = new ArrayList<Integer>();
+		cardValues.add(8);
+		cardValues.add(6);
+		cardValues.add(5);
+		cardValues.add(3);
+		cardValues.add(1);
+		
+		String[] cardTypes = {"S", "S", "S", "S", "S"}
+		String result = PokerHandResult.whatIsMyHand(cardValues, cardTypes);
+			
+	}
 	
 	
 }

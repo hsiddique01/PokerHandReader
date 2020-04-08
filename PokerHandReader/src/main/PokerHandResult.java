@@ -19,7 +19,13 @@ public class PokerHandResult {
  * @param cardTypes
  * @return
  */
-
+	private static final String HAND_RESULT = "Flush";
+	
+	public static String whatIsMyHand(List<Integer> cardValues, String[] cardTypes) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 	public static boolean checkFlush(String[] cardTypes) {
 		int counter = 0;
 		for(String cardType: cardTypes) {
@@ -66,5 +72,7 @@ public class PokerHandResult {
 		}
 		return result;
 	}
+
+	
 
 }
