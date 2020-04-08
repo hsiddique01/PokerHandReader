@@ -91,7 +91,20 @@ public class PokerHandResultTest {
 	}
 	
 	@Test
-	public void testProvidingMatchingSuitsSuitsSendsBackFlush() {
+	public void checkCountExist() {
+		List<Integer> cardValues = new ArrayList<Integer>();
+		cardValues.add(1);
+		cardValues.add(3);
+		cardValues.add(5);
+		cardValues.add(6);
+		cardValues.add(8);
+		
+		boolean result = PokerHandResult.isThereACount(cardValues);
+		assertFalse("Expected false when all input values are unique", result);
+	}
+	
+	@Test
+	public void testWhatKindOfFlushFunctionReturnsFlush() {
 		List<Integer> cardValues = new ArrayList<Integer>();
 		cardValues.add(8);
 		cardValues.add(6);
@@ -99,10 +112,37 @@ public class PokerHandResultTest {
 		cardValues.add(3);
 		cardValues.add(1);
 		
-		String[] cardTypes = {"S", "S", "S", "S", "S"}
-		String result = PokerHandResult.whatIsMyHand(cardValues, cardTypes);
-			
+		String result = PokerHandResult.whatKindOfFlush(cardValues);
+		assertEquals("Expected Flush when unique values but identical types are provided", "Flush", result);
 	}
+	
+	@Test
+	public void testWhatKindOfFlushFunctionReturnsFlush() {
+		List<Integer> cardValues = new ArrayList<Integer>();
+		cardValues.add(8);
+		cardValues.add(6);
+		cardValues.add(5);
+		cardValues.add(3);
+		cardValues.add(1);
+		String[] cardTypes = {"S", "S", "S", "S", "S"};
+		
+		String result = PokerHandResult.whatKindOfFlush(cardValues, cardTypes);
+		assertEquals("Expected Flush when unique values but identical types are provided", "Flush", result);
+	}
+	
+//	@Test
+//	public void testProvidingMatchingSuitsSuitsSendsBackFlush() {
+//		List<Integer> cardValues = new ArrayList<Integer>();
+//		cardValues.add(8);
+//		cardValues.add(6);
+//		cardValues.add(5);
+//		cardValues.add(3);
+//		cardValues.add(1);
+//	
+//		String[] cardTypes = {"S", "S", "S", "S", "S"}
+//		String result = PokerHandResult.whatIsMyHand(cardValues, cardTypes);
+//		assertEquals("Expected Flash when unique numbers but identifical types are sent", "Flash", result);			
+//	}
 	
 	
 }

@@ -19,12 +19,16 @@ public class PokerHandResult {
  * @param cardTypes
  * @return
  */
+
 	private static final String HAND_RESULT = "Flush";
 	
-	public static String whatIsMyHand(List<Integer> cardValues, String[] cardTypes) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	public static String whatIsMyHand(List<Integer> cardValues, String[] cardTypes) {
+//		if (checkFlush(cardTypes)) {
+//			return whatKindOfFlush(cardValues, cardTypes);
+//		}
+//		
+//		return null;
+//	}
 	
 	public static boolean checkFlush(String[] cardTypes) {
 		int counter = 0;
@@ -73,6 +77,15 @@ public class PokerHandResult {
 		return result;
 	}
 
-	
+	public static boolean isThereACount(List<Integer> cardValues) {
+		HashMap<Integer, Integer> counterCheck = valueCounterMap(cardValues);
+		return counterCheck.size() == 5? false: true;
+	}
 
+	public static String whatKindOfFlush(List<Integer> cardValues) {
+		if (checkOrder(cardValues)) {
+			return null;
+		}
+		return "Flush";
+	}
 }
