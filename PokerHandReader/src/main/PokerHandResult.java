@@ -6,6 +6,20 @@ import java.util.List;
 
 public class PokerHandResult {
 
+/**
+ * CardType = String Array
+ * CardValue = List int
+ * 
+ * Function:
+ * 	Flush check
+ * 	Order check
+ * 	Counter
+ * 		- returns HashMap, Key is cardvalue, Value is counter
+ * 		- For loop list, if cardValue exist in HashMap, increment Value  	
+ * @param cardTypes
+ * @return
+ */
+
 	public static boolean checkFlush(String[] cardTypes) {
 		int counter = 0;
 		for(String cardType: cardTypes) {
@@ -40,8 +54,17 @@ public class PokerHandResult {
 
 	public static HashMap<Integer, Integer> valueCounterMap(List<Integer> cardValues) {
 		HashMap<Integer, Integer> result = new HashMap<Integer, Integer>();
-		
-		return null;
+		for(int i: cardValues) {
+			if (result.containsKey(i)) {
+				int count = result.get(i) + 1;
+				result.remove(i);
+				result.put(i, count);
+			} else {
+				result.put(i, 1);
+			}
+			
+		}
+		return result;
 	}
 
 }
