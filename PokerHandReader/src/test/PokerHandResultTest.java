@@ -24,13 +24,13 @@ public class PokerHandResultTest {
 	
 	@Test
 	public void testFlushFunctionReturnsTrueWhenAllTheSameSuit() {
-		String[] cardTypes = {"S", "S", "S", "S", "S",};
+		String[] cardTypes = {"S", "S", "S", "S", "S"};
 		boolean result = PokerHandResult.checkFlush(cardTypes);
 		assertTrue("Expected true when same suits", result);
 	}
 	
 	@Test
-	public void testFlushFunctionReturnsFalseWhenAllDonnotMatch() {
+	public void testFlushFunctionReturnsFalseWhenAllDoNotMatch() {
 		String[] cardTypes = {"D", "D", "S", "S", "S"};
 		boolean result = PokerHandResult.checkFlush(cardTypes);
 		assertFalse("Expected false when not the same suits", result);
